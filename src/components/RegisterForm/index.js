@@ -1,15 +1,20 @@
 import React from 'react';
-import { compose, add } from 'ramda';
-import addLabel from '../../hocs/formFields/withLabel';
-import withConsoleLog from '../../hocs/formFields/withConsoleLog';
+import addLabel from '../Input/hocs/addLabel';
+import addChangeLogger from '../Input/hocs/addChangeLogger';
+import addWarningIcon from '../Input/hocs/addWarningIcon';
 import Input from '../Input';
 
-const FirstName = compose(addLabel('firstname'), withConsoleLog)(Input);
-
 const RegisterForm = () => (
-  <React.Fragment>
-    <FirstName />
-  </React.Fragment>
+  <Input
+    id="firstname"
+    name="firstname"
+    features={[
+      addLabel('First Name'),
+      addWarningIcon({ symbol: '!', predicateProp: 'hasError' }),
+      addChangeLogger
+    ]}
+    hasError={false}
+  />
 );
 
 export default RegisterForm;
